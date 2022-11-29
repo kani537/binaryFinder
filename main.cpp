@@ -19,24 +19,11 @@ int main(void)
   char *data = new char[size];
   ifs.read(data, size);
 
-  std::cout << "size = " << size << endl;
-
-  getline(cin, fileName);
-
-  std::ifstream ifs1(fileName, std::ios::binary);
-
-  ifs1.seekg(0, std::ios::end);
-  size = ifs1.tellg();
-  ifs1.seekg(0);
-
-  char *data1 = new char[size];
-  ifs1.read(data1, size);
-
-  std::cout << "size = " << size << endl;
-  for (int i = 0; i < size; i++)
+  std::cout << "size = " << size << "\n";
+  for (int i = 0; i < size - 6; i++)
   {
-    if (data[i] != data1[i])
-      cout << "0x" << std::hex << i << endl;
+    if ((data[i] & 0xFF) == 0x84 && (data[i + 1] & 0xFF) == 0xFF && (data[i + 2] & 0xFF) == 0xFF && (data[i + 3] & 0xFF) == 0xEB && (data[i + 5] & 0xFF) == 0x30 && (data[i + 6] & 0xFF) == 0xA0)
+      cout << "0x" << std::hex << i + 1 << endl;
   }
   delete[] data;
   return 0;
