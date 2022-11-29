@@ -36,7 +36,7 @@ int main(void)
   for (int i = 0; i < size; i++)
   {
     if (data[i] != data1[i])
-      cout << i << endl;
+      cout << "0x" << std::hex << i << endl;
   }
   delete[] data;
   return 0;
